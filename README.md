@@ -19,11 +19,14 @@ Started with Terraform-Zero-to-Hero by Abhishek Veeramalla
       - <img width="1406" height="676" alt="Screenshot 2026-05-06 at 6 06 12 PM" src="https://github.com/user-attachments/assets/fd24dcdb-87de-4c4d-8fe0-261a6b2cc555" />
       - <img width="2880" height="618" alt="tempImage3IsTRR" src="https://github.com/user-attachments/assets/1e3f623b-9765-4920-99ee-735b8abfc487" />
       - Finally AdminRP is showing as the user in terraform
-      ```
-       richierich@Richies-MacBook-Pro Desktop % aws sts get-caller-identity
-      {
-    "UserId": "AIDAT2WDJAUMAOZUPWSBD",
-    "Account": "263476282648",
-    "Arn": "arn:aws:iam::263476282648:user/AdminRP"
-     }
-      ```
+        ```
+         richierich@Richies-MacBook-Pro Desktop % aws sts get-caller-identity
+        {
+         "UserId": "AIDAT2WDJAUMAOZUPWSBD",
+         "Account": "263476282648",
+         "Arn": "arn:aws:iam::263476282648:user/AdminRP"
+        }
+         ```
+
+## 
+
