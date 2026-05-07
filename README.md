@@ -20,7 +20,7 @@ Started with Terraform-Zero-to-Hero by Abhishek Veeramalla
       - <img width="1406" height="676" alt="Screenshot 2026-05-06 at 6 06 12 PM" src="https://github.com/user-attachments/assets/fd24dcdb-87de-4c4d-8fe0-261a6b2cc555" />
       - <img width="2880" height="618" alt="tempImage3IsTRR" src="https://github.com/user-attachments/assets/1e3f623b-9765-4920-99ee-735b8abfc487" />
 ## 
-### Project : Creation of EC2 instance 
+### Mini-Project : Creation of EC2 instance 
  Using Terraform AWS Documentation to create main.tf file to create EC2 instance. 
 
  <img width="1440" height="900" alt="Screenshot 2026-05-06 at 7 44 20 PM" src="https://github.com/user-attachments/assets/821e452f-ba24-4617-9a9d-8103a157301f" />
@@ -77,6 +77,99 @@ Ran this command to stop the instance
 now completely deleting the ec2 instance 
 <img width="691" height="547" alt="Screenshot 2026-05-07 at 8 18 24 AM" src="https://github.com/user-attachments/assets/4acc6f88-4c4d-4e4f-abc2-04aaf34f108b" />
 <img width="1170" height="283" alt="Screenshot 2026-05-07 at 8 19 31 AM" src="https://github.com/user-attachments/assets/2dba7e09-0bdf-4351-9d6f-8b9055091e2a" />
+
+##
+##
+
+Provider is a medium to understand where the infrastructure needs to be created. In terraform providers page we can find n number of providers that are mainly classified into 3 types : Official, Partner & Community Providers.
+ *for multiple regions we use alias
+ *for multiple clouds the syntax is different for which we can always refer to Hashicorp documentation
+
+Variables here are of 2 types- Input & Output Variables
+terraform.tfvars
+when using terraform apply (terraform.tfvars values are taken automatically)
+But if default/initial values are in some other files (eg. dev.tfvars) then we use command terraform apply --dev.tfvars
+
+
+Created 3 terraform files-
+<img width="310" height="367" alt="Screenshot 2026-05-07 at 5 44 38 PM" src="https://github.com/user-attachments/assets/df040c41-05e2-4df2-ba24-597e988e7be2" />
+
+   ```
+       provider "aws" {
+       region = "ap-south-1"
+        }
+
+       resource "aws_instance" "e1" {
+       ami = var.ami_value
+       instance_type = var.instance_type_value
+        }
+
+   ```
+
+   ```
+       variable "ami_value" {
+       description = "value for ami_value"
+        }
+
+       variable "instance_type_value" {
+       description = "value for instance_type"
+        }
+   ```
+
+
+   ```
+       ami_value = "ami-07a00cf47dbbc844c"
+       instance_type_value = "t3.micro"
+   ```
+Ran Terraform commands: 
+terraform init
+terraform plan
+terraform apply
+
+and EC2 Instance got created-
+  <img width="1133" height="259" alt="Screenshot 2026-05-07 at 7 09 51 PM" src="https://github.com/user-attachments/assets/942edad5-1416-48fa-9c66-c70785e8f243" />
+
+
+Checking in console for instance created-
+<img width="1185" height="384" alt="Screenshot 2026-05-07 at 7 10 39 PM" src="https://github.com/user-attachments/assets/257b1819-94ab-4f64-96c0-ee84e2c59d55" />
+
+Adding output.tf file to the folder to display the public IP address of the ec2 instance created
+   ```
+       output "public_ip" {
+        value = aws_instance.e1.public_ip
+         }
+   ```
+
+<img width="1129" height="406" alt="Screenshot 2026-05-07 at 8 47 37 PM" src="https://github.com/user-attachments/assets/4032ad5c-6bab-4be7-8996-ffa0c89d489a" />
+
+Checking the created ec2 instance on AWS Console
+
+<img width="1175" height="302" alt="Screenshot 2026-05-07 at 8 48 04 PM" src="https://github.com/user-attachments/assets/83acb95b-f22f-423f-80d0-c2e06eec17e1" />
+
+Creating module
+
+<img width="311" height="359" alt="Screenshot 2026-05-07 at 9 32 46 PM" src="https://github.com/user-attachments/assets/2e118f2e-901c-406e-a435-677d75e47a4c" />
+
+<img width="765" height="812" alt="Screenshot 2026-05-07 at 9 33 17 PM" src="https://github.com/user-attachments/assets/aa907987-addb-4e53-acde-e7117be6e0cf" />
+
+<img width="1178" height="339" alt="Screenshot 2026-05-07 at 9 33 44 PM" src="https://github.com/user-attachments/assets/54a604df-b1c0-414a-8435-008fb03e56ab" />
+##
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
