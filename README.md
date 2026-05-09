@@ -154,7 +154,17 @@ Creating module
 
 <img width="1178" height="339" alt="Screenshot 2026-05-07 at 9 33 44 PM" src="https://github.com/user-attachments/assets/54a604df-b1c0-414a-8435-008fb03e56ab" />
 ##
+Importance of statefiles
+apply and destroy use statefiles to check what actions they need to perform 
+drawbacks: it records everything including passwords and other sensitive information
 
+<img width="679" height="432" alt="Screenshot 2026-05-09 at 1 46 08 PM" src="https://github.com/user-attachments/assets/ecd23559-2622-4840-8ec4-f8fdd934770e" />
+
+ terraform show gives statefile
+
+ S3 bucket me terraform state file save kiya to fir usko sirf wahi access kr paega jiske pas s3w bucket ka access h. 
+ locking mechanism dynamodb table
+ 
 
 
 
