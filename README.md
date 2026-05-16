@@ -220,24 +220,106 @@ S3 bucket helps with that-
    - S3 bucket access is completely restricted and secured as it can be configured with IAM policies
    - all modifications done to code can easily be updated in S3 automatically 
 
+<img width="746" height="618" alt="Screenshot 2026-05-16 at 8 08 14 AM" src="https://github.com/user-attachments/assets/cbee7157-5bd4-4258-b787-1f9056f603ed" />
+
+first create main.tf to create s3 bucket: 
+
+<img width="463" height="529" alt="Screenshot 2026-05-16 at 8 16 31 AM" src="https://github.com/user-attachments/assets/a7bd6a25-0691-4a9c-b600-5ae8cfc310b5" />
+
+<img width="640" height="845" alt="Screenshot 2026-05-16 at 8 27 29 AM" src="https://github.com/user-attachments/assets/6ee9cb32-1e3e-4b68-ba28-efcf3536006c" />
+
+created backend.tf and again ran 'terraform init' command. 
+Following image shows that my already created s3 bucket is not ready to be used to store terraform state files. There is also a question asking if the user wants to transfer the local statefile to s3 bucket or not. 
+<img width="626" height="769" alt="Screenshot 2026-05-16 at 8 29 22 AM" src="https://github.com/user-attachments/assets/91cb88d7-4943-4f41-96b7-734ca77f7ea1" />
+
+terraform plan
+<img width="960" height="420" alt="Screenshot 2026-05-16 at 8 32 16 AM" src="https://github.com/user-attachments/assets/7ebaca03-f378-4498-a570-7f6f3b2159d5" />
+
+
+terraform apply
+<img width="997" height="454" alt="Screenshot 2026-05-16 at 8 33 27 AM" src="https://github.com/user-attachments/assets/f5c9c6f0-995a-4249-9abc-8a5a17d5c87e" />
+
+Verification on AWS console 
+<img width="1417" height="456" alt="Screenshot 2026-05-16 at 8 34 01 AM" src="https://github.com/user-attachments/assets/efc4ad4e-c871-4fce-ad73-acba95905780" />
+
+if we run command 'terraform show'
+the state file will be shown directly from the s3 bucket that was created
+
+on using terraform destroy got this interruption
+<img width="1130" height="296" alt="Screenshot 2026-05-16 at 8 50 29 AM" src="https://github.com/user-attachments/assets/9307a096-473f-456e-b0d3-95759865ef80" />
+
+
+Learned 3 methods to delete contents of s3 bucket
+- Using terraform to empty it
+     - <img width="909" height="374" alt="Screenshot 2026-05-16 at 8 53 49 AM" src="https://github.com/user-attachments/assets/88dea215-848d-45c5-9eaa-164e2f0cfd6d" />
+- Manually empying the bucket using AWS CLI
+     - <img width="907" height="210" alt="Screenshot 2026-05-16 at 8 56 03 AM" src="https://github.com/user-attachments/assets/4146ec38-4d7c-4b47-8a7a-ffb2d83665dc" />
+- Using one-liner force delete
+     - <img width="900" height="74" alt="Screenshot 2026-05-16 at 8 58 01 AM" src="https://github.com/user-attachments/assets/41a00a6a-2309-4e29-9404-e2b6e71a34e8" />
+
+Deleted the statefiles from s3 bucket
+<img width="683" height="190" alt="Screenshot 2026-05-16 at 8 59 26 AM" src="https://github.com/user-attachments/assets/6423ccd7-1e88-43db-b889-a9ee5920082d" />
+
+Finally destroyed 
+<img width="859" height="166" alt="Screenshot 2026-05-16 at 9 01 59 AM" src="https://github.com/user-attachments/assets/fbff4013-0af3-4bb3-b572-5c7e4337bacb" />
+
+***Note for self : The S3 bucket and the dynamodb table to create statefile source and statefile lock should be created before writing backend.tf code
+
+Locking mechanism to safe concurrent access to infrastructure using dynamoDB table
+
+using terraform registry to find dynamodb table code
+<img width="1069" height="510" alt="Screenshot 2026-05-16 at 8 41 10 AM" src="https://github.com/user-attachments/assets/6c0c7fca-3372-4cb0-815a-f3674a5fb61f" />
 
 
 
+updated main.tf to implement statefile locking mechanism & Commented the updated backend file to create s3 bucket and dynamodb table first
+<img width="1395" height="433" alt="Screenshot 2026-05-16 at 9 46 35 AM" src="https://github.com/user-attachments/assets/d5d4921e-295b-4848-bc1f-15ce389297cc" />
 
 
+Initialised terraform :
+<img width="612" height="318" alt="Screenshot 2026-05-16 at 9 47 41 AM" src="https://github.com/user-attachments/assets/4d7c3630-6f83-4892-8abc-7efc7000719a" />
+
+terraform plan :
+<img width="1061" height="104" alt="Screenshot 2026-05-16 at 9 48 42 AM" src="https://github.com/user-attachments/assets/6c848e12-29a0-4dda-8204-5665b7061c7b" />
+
+terraform apply :
+<img width="603" height="167" alt="Screenshot 2026-05-16 at 9 51 41 AM" src="https://github.com/user-attachments/assets/40658088-ffa3-4c47-a1f8-743b8376641b" />
 
 
+<img width="730" height="247" alt="Screenshot 2026-05-16 at 9 50 41 AM" src="https://github.com/user-attachments/assets/7a8c9562-3b0f-4e6a-99b7-08b8818c3d95" />
+<img width="1127" height="212" alt="Screenshot 2026-05-16 at 9 51 11 AM" src="https://github.com/user-attachments/assets/4375a345-5a82-4a2f-9b08-dcca163d18f3" />
+
+Updated backend.tf
+
+<img width="742" height="258" alt="Screenshot 2026-05-16 at 9 53 25 AM" src="https://github.com/user-attachments/assets/b218f87f-8a23-48bc-b202-ea9875bbd8aa" />
+
+terraform initialise to shows we no longer need to create dynamodb table to lock state. Instead we can use parameter "use_lockfile". 
+
+<img width="619" height="585" alt="Screenshot 2026-05-16 at 9 54 42 AM" src="https://github.com/user-attachments/assets/158f5526-da24-416c-9201-62749257e40a" />
+
+Updated both tf files:
+
+<img width="1137" height="273" alt="Screenshot 2026-05-16 at 12 25 05 PM" src="https://github.com/user-attachments/assets/e06e70bf-b5ca-42dd-b344-25ad0d892098" />
+
+Initialising-
+<img width="614" height="469" alt="Screenshot 2026-05-16 at 12 28 15 PM" src="https://github.com/user-attachments/assets/c80e98e1-578d-48ac-a803-766f9cb873ae" />
+
+Terraform plan clearly shows that dynamodb table that was previously created is going to get destroyed as main.tf and backend.tf files were updated
 
 
+<img width="1082" height="705" alt="Screenshot 2026-05-16 at 12 28 53 PM" src="https://github.com/user-attachments/assets/c48ed5a9-9b5a-44f6-b839-b293c5a2ab75" />
+
+terraform apply-
 
 
+<img width="993" height="809" alt="Screenshot 2026-05-16 at 12 30 53 PM" src="https://github.com/user-attachments/assets/f6e79917-44e8-4b6b-acac-2e580ab4a3e0" />
 
+Verification on console- 
+<img width="1423" height="519" alt="Screenshot 2026-05-16 at 12 31 53 PM" src="https://github.com/user-attachments/assets/ab8696c4-1050-4c31-b0b7-9741a2d3a41c" />
 
+#### use_lockfile = true
 
-
-
-
-
+terraform will create a temporary lock file in the statefiles in S3 bucket and use S3’s own mechanisms to ensure only one run can hold the lock
 
 
 
