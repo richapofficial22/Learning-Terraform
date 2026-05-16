@@ -200,19 +200,27 @@ Ran the terraform commands to get our EC2 instance created again.
 ##
 
 
-Importance of statefiles
+Importance of statefiles: 
+It recorde the infrastructure that it has created, helps in updating the created infrastructure, and also what to destroy. 
 
-apply and destroy use statefiles to check what actions they need to perform 
 
-drawbacks: it records everything including passwords and other sensitive information
+But there are 2 drawbacks to statefiles: 
 
-<img width="679" height="432" alt="Screenshot 2026-05-09 at 1 46 08 PM" src="https://github.com/user-attachments/assets/ecd23559-2622-4840-8ec4-f8fdd934770e" />
+1. Sensitive information may be stored in the state file if it's committed to a Version Control System. This poses a security risk because VCS repositories are often shared among team members.
 
- terraform show gives statefile
-
- S3 bucket me terraform state file save kiya to fir usko sirf wahi access kr paega jiske pas s3w bucket ka access h. 
- locking mechanism dynamodb table
  
+2. Managing state files in VCS can lead to complex versioning issues, especially when multiple team members are working on the same infrastructure.
+
+
+### Remote Backends
+Terraform gives an option of storing terraform statefile in external resources instead of local/virtual machine.
+eg. using S3 bucket, Terraform cloud
+
+S3 bucket helps with that- 
+   - S3 bucket access is completely restricted and secured as it can be configured with IAM policies
+   - all modifications done to code can easily be updated in S3 automatically 
+
+
 
 
 
