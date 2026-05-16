@@ -315,7 +315,13 @@ terraform apply-
 <img width="993" height="809" alt="Screenshot 2026-05-16 at 12 30 53 PM" src="https://github.com/user-attachments/assets/f6e79917-44e8-4b6b-acac-2e580ab4a3e0" />
 
 Verification on console- 
+
+Dynamodb table is deleted
 <img width="1423" height="519" alt="Screenshot 2026-05-16 at 12 31 53 PM" src="https://github.com/user-attachments/assets/ab8696c4-1050-4c31-b0b7-9741a2d3a41c" />
+
+We can see terraform.tfstate.tflock created 
+<img width="1416" height="483" alt="Screenshot 2026-05-16 at 12 40 56 PM" src="https://github.com/user-attachments/assets/54f851ae-4d32-411c-ac78-d947a31b8de8" />
+
 
 #### use_lockfile = true
 
