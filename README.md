@@ -327,6 +327,56 @@ We can see terraform.tfstate.tflock created
 
 terraform will create a temporary lock file in the statefiles in S3 bucket and use S3’s own mechanisms to ensure only one run can hold the lock
 
+This time deleting the resource manually using the following command and not using destroy command :
+
+
+aws s3 rb s3://richa-s3-bucket-state-file --force --region ap-south-1
+
+##
+##
+
+## Provisioners : 
+Used to execute scripts or shell commands on local or remote machines. one can perform bootstrap actions—such as installing software, patching kernels, or running configuration management that cannot be directly represented in Terraform's declarative infrastructure model.
+
+ 
+ 3 types-
+      
+ 1. local-exec
+ 2. remote-exec
+ 3. file
+
+Mini-project using demonstration : Create a simple python app and deploy it on cloud
+
+Used Terraform registry throughout this project to create resources and provisioners (remote-exec & file) in main.tf file
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
