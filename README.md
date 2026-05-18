@@ -3,6 +3,7 @@
 
 - Source : https://www.youtube.com/watch?v=fgp-t5SqQmM&list=PLdpzxOOAlwvI0O4PeKVV1-yJoX2AqIWuf
 - Github repo for instructor notes : https://github.com/iam-veeramalla/terraform-zero-to-hero/blob/main/README.md
+- Terraform Registry for getting code for infrastructure
 
 ## Started with Terraform-Zero-to-Hero by Abhishek Veeramalla
 **Setup:**
