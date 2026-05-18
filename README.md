@@ -5,6 +5,19 @@
 - Github repo for instructor notes : https://github.com/iam-veeramalla/terraform-zero-to-hero/blob/main/README.md
 - Terraform Registry for getting code for infrastructure
 
+##
+## What I Learned
+| Topic | Status |
+|---|---|
+| Terraform Lifecycle | ✅ |
+| EC2 Provisioning | ✅ |
+| Variables & Outputs | ✅ |
+| Modules | ✅ |
+| Remote Backend (S3) | ✅ |
+| Workspaces | ✅ |
+| Provisioners | ✅ |
+| Secrets Management (Vault) | 📖 Conceptual |
+##
 ## Started with Terraform-Zero-to-Hero by Abhishek Veeramalla
 **Setup:**
 
