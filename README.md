@@ -345,19 +345,71 @@ Used to execute scripts or shell commands on local or remote machines. one can p
  2. remote-exec
  3. file
 
-Mini-project using demonstration : Create a simple python app and deploy it on cloud
+Understood the concept of provisioners using the demonstration of deploying a python app on cloud using terraform.
 
-Used Terraform registry throughout this project to create resources and provisioners (remote-exec & file) in main.tf file
+## aws-ec2-terraform-nginx-deploy : LINK TO MY OWN PROJECT 
+
+##
+##
+
+### Concept of workspaces
+
+Showing the directory Day6 and module ec2_instance having main.tf files
 
 
+- <img width="1392" height="349" alt="Screenshot 2026-05-18 at 11 26 49 AM" src="https://github.com/user-attachments/assets/4b8fdbb6-7135-42ec-bbac-7fb5af16d202" />
+
+stage.tfvars & terraform.tfvars
 
 
+- <img width="1390" height="89" alt="Screenshot 2026-05-18 at 11 29 01 AM" src="https://github.com/user-attachments/assets/deef4cdd-252e-4385-8018-c11c13f0a6b2" />
 
 
+executed terraform init and then terraform apply. It executed and formed EC2 instance with terraform.tfvars file having instance type t2.micro
+
+- <img width="722" height="229" alt="Screenshot 2026-05-18 at 11 31 20 AM" src="https://github.com/user-attachments/assets/ddd7e60b-2e56-4aef-aae7-8a76ea482b04" />
+
+- <img width="1174" height="302" alt="Screenshot 2026-05-18 at 11 34 41 AM" src="https://github.com/user-attachments/assets/0556c65c-2592-4b5f-9969-b33018f46aa2" />
 
 
+Executing terraform apply with stage.tfvars to see what will happen
+
+- <img width="992" height="398" alt="Screenshot 2026-05-18 at 11 37 27 AM" src="https://github.com/user-attachments/assets/9e14c6b5-6e29-4735-9589-dd449744061a" />
 
 
+the instance having type t2.micro changed to t2.medium
+- <img width="1176" height="297" alt="Screenshot 2026-05-18 at 11 56 25 AM" src="https://github.com/user-attachments/assets/9a1ad508-b859-44c6-b467-ff7322d1a3fb" />
+
+## Creating workspaces - dev, stage, prod 
+ command : terraform workspace new "name of the workspace"
+
+ - <img width="634" height="609" alt="Screenshot 2026-05-18 at 12 18 24 PM" src="https://github.com/user-attachments/assets/815cdad3-ec6c-4dda-802f-1d19f6c2b666" />
+
+initialised terraform, then checked if any workspace was selected or not, then chose 'dev' as workspace.
+- <img width="605" height="191" alt="Screenshot 2026-05-18 at 12 23 00 PM" src="https://github.com/user-attachments/assets/2337c6a1-f55e-4a12-b2ce-38c786372be2" />
+
+
+executed terraform apply and now I can see that statefile has been created in the 'dev' workspace under terraform.tfstate.d . This statefile will show the work being done in 'dev' workspace irrespective of the other environments.
+- <img width="458" height="237" alt="Screenshot 2026-05-18 at 12 25 03 PM" src="https://github.com/user-attachments/assets/fffadf48-50a9-4fcf-9919-655d61d54980" />
+
+****We can work with workspaces in 2 ways (pertaining to the above demo) -
+creating diffrent tfvars for different environments and then running terraform apply command with -var-file of the particular workspace OR automating this thing also into the main.tf file
+
+main.tf :
+- <img width="701" height="382" alt="Screenshot 2026-05-18 at 1 02 21 PM" src="https://github.com/user-attachments/assets/df8a1766-e19d-43c2-aef7-d665d3419e66" />
+terraform.tfvars :
+- <img width="327" height="101" alt="Screenshot 2026-05-18 at 1 04 11 PM" src="https://github.com/user-attachments/assets/ead00b81-9fb9-401a-b2ab-19c601764a6d" />
+
+Since value for instance_type will be selected by the user when he chooses the workspace there is no need of terraform.tfvars to have instance_type variable. Selected 'prod' as workspace and ran terraform apply. 
+Our EC2 instance has been created for 'prod' workspace having instance_type as 't2.xlarge'
+- <img width="677" height="261" alt="Screenshot 2026-05-18 at 1 05 24 PM" src="https://github.com/user-attachments/assets/9f76c636-7cee-48e6-9010-63e536cb33ef" />
+- <img width="1165" height="238" alt="Screenshot 2026-05-18 at 1 08 38 PM" src="https://github.com/user-attachments/assets/e1f752d9-09ef-47fe-8dae-0cdee413512c" />
+
+We can see that a separate statefile has also been created for 'prod' workspace
+<img width="348" height="254" alt="Screenshot 2026-05-18 at 1 06 13 PM" src="https://github.com/user-attachments/assets/0d0c73ac-20b8-4224-9743-aa7e04d75512" />
+
+##
+##
 
 
 
