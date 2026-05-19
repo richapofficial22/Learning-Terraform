@@ -489,7 +489,8 @@ Used to execute scripts or shell commands on local or remote machines. one can p
 Understood the concept of provisioners using the demonstration of deploying a python app on cloud using terraform.
 
 
-## aws-ec2-terraform-nginx-deploy : LINK TO MY OWN PROJECT 
+## aws-ec2-terraform-nginx-deploy : https://github.com/richapofficial22/AWS-EC2-Terraform-Nginx-Deploy 
+Automated EC2 provisioning and Nginx web server deployment on AWS using Terraform. Covers VPC, subnets, security groups, IGW, and file provisioning via SSH.
 
 ##
 ##
